@@ -1,1 +1,59 @@
-<p>employees works!</p>
+{{employees|json}}
+<div class="row fw-bold my-3">
+    <div *ngFor="let oszlop of oszlopok" class="col">
+        {{oszlop.text}}
+    </div>
+    <div class="col">
+        Műveletek
+    </div>
+</div>
+
+<div  class="row my-1">
+    <div *ngFor="let oszlop of oszlopok" class="col">
+        <!-- {{employee[oszlop.key]}} -->
+        <ng-container [ngSwitch]="oszlop.type">
+
+            <span *ngSwitchCase="'plain'"> {{newEmployee[oszlop.key]}} </span>
+            
+            <select class="form-select form-select-lg mb-3" [(ngModel)]="newEmployee[oszlop.key]" *ngSwitchCase="'select'">
+                <option 
+                    *ngFor="let ertek of oszlop.options" 
+                    [value]="ertek.value">
+                    {{ertek.text}}
+                </option>
+            </select>
+            
+            <input *ngSwitchDefault [(ngModel)]="newEmployee[oszlop.key]" [type]="oszlop.type" class="form-control">
+        
+        </ng-container>        
+    </div>
+    <div class="col">
+        <button type="button" class="btn btn-primary btn-sm">Hozzáad</button>
+      
+    </div>
+</div>
+
+<div *ngFor="let employee of employees" class="row my-1">
+    <div *ngFor="let oszlop of oszlopok" class="col">
+        <!-- {{employee[oszlop.key]}} -->
+        <ng-container [ngSwitch]="oszlop.type">
+
+            <span *ngSwitchCase="'plain'"> {{employee[oszlop.key]}} </span>
+            
+            <select class="form-select form-select-lg mb-3" [(ngModel)]="employee[oszlop.key]" *ngSwitchCase="'select'">
+                <option 
+                    *ngFor="let ertek of oszlop.options" 
+                    [value]="ertek.value">
+                    {{ertek.text}}
+                </option>
+            </select>
+            
+            <input *ngSwitchDefault [(ngModel)]="employee[oszlop.key]" [type]="oszlop.type" class="form-control">
+        
+        </ng-container>        
+    </div>
+    <div class="col">
+        <button type="button" class="btn btn-primary btn-sm">Módosít</button>
+        <button type="button" class="btn btn-danger btn-sm ms-2">Töröl</button>
+    </div>
+</div>
