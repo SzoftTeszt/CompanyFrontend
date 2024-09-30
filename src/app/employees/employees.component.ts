@@ -31,4 +31,17 @@ export class EmployeesComponent {
     )
   }
 
+
+  addEmployee(){
+    this.base.postEmployee(this.newEmployee)
+    this.newEmployee={}
+  }
+
+  updateEmployee(employee:any){
+    this.base.putEmployee(employee)
+  }
+
+  deleteEmployee(employee:any){
+    this.base.deleteEmployee(employee)
+  }
 }
